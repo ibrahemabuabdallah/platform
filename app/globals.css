@@ -212,6 +212,11 @@
   .arabic-numbers {
     font-feature-settings: "lnum";
   }
+  .title-accent {
+    letter-spacing: normal;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
 }
 
 @layer components {

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Inbox, Users, ShieldCheck } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
 import { Card } from "@/components/ui/card";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -46,8 +47,8 @@ export function WhatIs() {
         title={
           <>
             منظومة متكاملة تربط
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">الصوت بالحل</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">الصوت بالحل</TitleAccent>
           </>
         }
         description="ليست مجرد نموذج استقبال — بل بنية رقمية كاملة تحوّل كل شكوى إلى رحلة موثقة من البداية للنهاية."

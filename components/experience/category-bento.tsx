@@ -12,6 +12,7 @@ import {
   Wifi,
   Layers,
 } from "lucide-react";
+import { TitleAccent } from "@/components/shared/title-accent";
 import { DepthTilt } from "./depth-tilt";
 
 interface Cat {
@@ -125,7 +126,7 @@ export function CategoryBento() {
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
             8 محاور خدمية
             <br />
-            <span className="text-emerald-700">برعاية متخصصين</span>
+            <TitleAccent variant="emerald">برعاية متخصصين</TitleAccent>
           </h2>
           <p className="mt-3 text-stone-600 leading-relaxed">
             كل محور يديره فريق مختص وتسانده لجنة فنية لضمان الحلّ الصحيح.

@@ -58,7 +58,7 @@ export function SectionHeader({
       {badge && <div className="mb-4">{badge}</div>}
       <h2
         className={cn(
-          "font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight text-balance",
+          "font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight",
           tone === "light" ? "text-stone-900" : "text-white"
         )}
       >

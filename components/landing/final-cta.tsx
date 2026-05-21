@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
 import { Button } from "@/components/ui/button";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 
 const reassurances = [
@@ -86,12 +87,10 @@ export function FinalCTA() {
             صوتك يصنع فرقاً
           </span>
 
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-5xl font-extrabold leading-tight text-balance text-emerald-900">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-5xl font-extrabold leading-tight text-emerald-900">
             ابدأ رحلتك الآن
-            <br className="hidden sm:block" />
-            <span className="bg-gradient-to-l from-gold-600 via-gold-500 to-gold-700 bg-clip-text text-transparent">
-              واجعل صوتك حلاً
-            </span>
+            <TitleLineBreak />
+            <TitleAccent variant="gold-dark">واجعل صوتك حلاً</TitleAccent>
           </h2>
           <p className="mt-5 text-sm sm:text-base text-stone-600 max-w-xl mx-auto leading-relaxed">
             لا تتردد — كل شكوى نتلقاها تتحوّل إلى قضية موثقة وفريقنا الميداني

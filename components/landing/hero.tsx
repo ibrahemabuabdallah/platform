@@ -154,7 +154,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-700 leading-[1.15]"
             >
-              شكواكَ تُحَلّ — من الاستقبال
+              شكواكَ تُحَلّ — من الاستقبال{" "}
               <br className="hidden sm:block" />
               حتى التدخّل الميداني.
             </motion.h2>

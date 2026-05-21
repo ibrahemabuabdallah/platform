@@ -14,6 +14,7 @@ import {
   Fingerprint,
   KeySquare,
 } from "lucide-react";
+import { TitleAccent } from "@/components/shared/title-accent";
 
 const POINTS = [
   {
@@ -73,9 +74,9 @@ export function PrivacyVault() {
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
             بياناتك في خزنة رقمية
             <br />
-            <span className="bg-gradient-to-l from-gold-300 via-gold-400 to-gold-200 bg-clip-text text-transparent">
+            <TitleAccent variant="gold-light">
               لا يفتحها إلا من له الصلاحية
-            </span>
+            </TitleAccent>
           </h2>
         </div>
 

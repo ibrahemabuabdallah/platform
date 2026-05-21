@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, MapPin, Hash, Megaphone, Clock } from "lucide-react";
 import { resolvedCases, type ResolvedCase } from "@/data/resolved-cases";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -87,8 +88,8 @@ export function ResolvedMarquee() {
         title={
           <>
             قضايا حقيقية
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">أُغلقت بنجاح هذا الشهر</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">أُغلقت بنجاح هذا الشهر</TitleAccent>
           </>
         }
         description="عيّنة من آخر القضايا التي وثّقها النظام وأغلقت رسمياً عبر قنوات التدخل الميداني."

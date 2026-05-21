@@ -11,6 +11,7 @@ import {
   GitBranch,
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -40,8 +41,8 @@ export function JourneyTimeline() {
         title={
           <>
             من الشكوى إلى الحل
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">في 7 خطوات موثقة</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">في 7 خطوات موثقة</TitleAccent>
           </>
         }
         description="رحلة كل قضية مرئية بالكامل — لا بيروقراطية، لا غموض، فقط شفافية تامة من الإرسال حتى الإغلاق."

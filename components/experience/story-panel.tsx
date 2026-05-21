@@ -14,6 +14,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
+import { TitleAccent } from "@/components/shared/title-accent";
 
 const STATEMENTS = [
   {
@@ -77,7 +78,7 @@ export function StoryPanel() {
               <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
                 منصة رسمية
                 <br />
-                <span className="text-emerald-700">صُمّمت للمواطن</span>
+                <TitleAccent variant="emerald">صُمّمت للمواطن</TitleAccent>
               </h2>
 
               <p className="mt-4 text-stone-600 leading-relaxed">

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Map, TrendingUp, AlertCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Heatmap } from "@/components/shared/heatmap";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -47,8 +48,8 @@ export function HeatmapSection() {
         title={
           <>
             تركّز القضايا
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">حسب المناطق الجغرافية</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">حسب المناطق الجغرافية</TitleAccent>
           </>
         }
         description="عرض رمزي لتوزيع القضايا — كلما كان اللون أغمق، زادت الكثافة في تلك المنطقة."

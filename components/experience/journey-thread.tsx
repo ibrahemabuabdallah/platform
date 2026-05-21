@@ -11,6 +11,7 @@ import {
   GitBranch,
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
+import { TitleAccent } from "@/components/shared/title-accent";
 import { useReducedMotion } from "framer-motion";
 
 const STEPS = [
@@ -153,7 +154,7 @@ export function JourneyThread() {
             </span>
             <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
               من الشكوى إلى الحل
-              <span className="text-emerald-700"> في 7 محطات موثّقة</span>
+              <TitleAccent variant="emerald">في 7 محطات موثّقة</TitleAccent>
             </h2>
             <p className="mt-3 text-stone-600 leading-relaxed max-w-2xl mx-auto">
               مرّر للأسفل ليتحرّك الخيط الذهبي عبر المراحل — كل محطة تُضاء حين

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, EyeOff, Lock, Trash2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -52,8 +53,8 @@ export function Privacy() {
         title={
           <>
             بياناتك بأيدٍ أمينة
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">والشفافية أولوية مطلقة</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">والشفافية أولوية مطلقة</TitleAccent>
           </>
         }
         description="نحترم خصوصية المواطن ونلتزم بأعلى معايير الحماية وشفافية الإجراءات."

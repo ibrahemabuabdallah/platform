@@ -159,7 +159,7 @@ export function CinematicHero() {
             <span>43 فرع نشط على المستوى الوطني</span>
           </motion.div>
 
-          <h1 className="mt-6 font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-white text-balance">
+          <h1 className="mt-6 font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white">
             <span className="inline-flex flex-wrap justify-center gap-x-3">
               {headlineWords.map((w, i) => (
                 <motion.span
@@ -182,9 +182,9 @@ export function CinematicHero() {
               initial={{ clipPath: "inset(0 100% 0 0)" }}
               animate={{ clipPath: "inset(0 0% 0 0)" }}
               transition={{ duration: 1.1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative inline-block mt-2"
+              className="relative inline-block mt-2 ms-3 sm:ms-0"
             >
-              <span className="bg-gradient-to-l from-gold-300 via-gold-400 to-gold-200 bg-clip-text text-transparent">
+              <span className="title-accent bg-gradient-to-l from-gold-300 via-gold-400 to-gold-200 bg-clip-text text-transparent">
                 {goldLine}
               </span>
               <motion.span

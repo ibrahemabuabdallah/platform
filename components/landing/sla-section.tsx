@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 
 const slaLevels = [
   {
@@ -84,8 +85,8 @@ export function SLASection() {
         title={
           <>
             لكل قضية موعد استجابة
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">ومسار تصعيد واضح</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">ومسار تصعيد واضح</TitleAccent>
           </>
         }
         description="نلتزم بمعايير زمنية صارمة لكل أولوية، مع آلية تصعيد آلية في حال التأخر."

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
 import { Card } from "@/components/ui/card";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -111,8 +112,10 @@ export function AIDemo() {
         title={
           <>
             تصنيف فوري وتوجيه دقيق
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">قبل أن تكمل قراءة هذه الجملة</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">
+              قبل أن تكمل قراءة هذه الجملة
+            </TitleAccent>
           </>
         }
         description="بمجرد تقديم الشكوى، يحلّل النظام النص ويستخرج النوع والأولوية والجهة المختصة بدقة عالية."

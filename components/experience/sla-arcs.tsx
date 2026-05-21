@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Clock, Zap, Flame, Activity, MoonStar } from "lucide-react";
+import { TitleAccent } from "@/components/shared/title-accent";
 
 interface Tier {
   label: string;
@@ -80,7 +81,7 @@ export function SLAArcs() {
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
             وقت استجابة معلن مسبقاً
             <br />
-            <span className="text-emerald-700">لكل نوع من الشكاوى</span>
+            <TitleAccent variant="emerald">لكل نوع من الشكاوى</TitleAccent>
           </h2>
           <p className="mt-3 text-stone-600 leading-relaxed">
             نلتزم رسمياً بهذه المُدد — أي تجاوز يُسجّل في سجل التدقيق ويُحاسَب

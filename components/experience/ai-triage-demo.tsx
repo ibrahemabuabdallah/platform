@@ -17,6 +17,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
+import { TitleAccent } from "@/components/shared/title-accent";
 
 const SAMPLE = "كسر في ماسورة المياه أمام البيت يهدر كميات كبيرة منذ يومين";
 
@@ -102,7 +103,9 @@ export function AITriageDemo() {
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
             تكتب الشكوى بكلامك العادي
             <br />
-            <span className="text-emerald-700">والمنصة تعرف الجهة المختصة</span>
+            <TitleAccent variant="emerald">
+              والمنصة تعرف الجهة المختصة
+            </TitleAccent>
           </h2>
           <p className="mt-3 text-stone-600 leading-relaxed">
             محرّك تصنيف لغوي عربي مدرّب على آلاف الحالات الفعلية — يقرأ النص،

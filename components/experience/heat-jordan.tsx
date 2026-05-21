@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Map, Building2, Activity, CheckCircle2 } from "lucide-react";
+import { TitleAccent } from "@/components/shared/title-accent";
 
 interface BranchPoint {
   id: string;
@@ -47,7 +48,7 @@ export function HeatJordan() {
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
             43 فرع · 12 محافظة
             <br />
-            <span className="text-emerald-700">تغطية وطنية شاملة</span>
+            <TitleAccent variant="emerald">تغطية وطنية شاملة</TitleAccent>
           </h2>
           <p className="mt-3 text-stone-600 leading-relaxed">
             مرّر فوق أي محافظة لتعرف عدد القضايا المفتوحة والمغلقة لحظياً.

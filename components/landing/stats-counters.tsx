@@ -13,6 +13,7 @@ import {
 import { formatLocaleNumber } from "@/lib/utils";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 
 const stats = [
   {
@@ -98,8 +99,8 @@ export function StatsCounters() {
         title={
           <>
             منصة تعمل بالأرقام
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">وتصنع نتائج ملموسة</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">وتصنع نتائج ملموسة</TitleAccent>
           </>
         }
         description="إحصائيات حية تعكس أثر المنصة في حياة المواطنين على مستوى المملكة."

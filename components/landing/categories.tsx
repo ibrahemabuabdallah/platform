@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
 import { Card } from "@/components/ui/card";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
 import { SectionTag, SectionHeader } from "./section-tag";
 
@@ -108,8 +109,8 @@ export function Categories() {
         title={
           <>
             كل مشكلتك تهمنا
-            <br className="hidden sm:block" />
-            <span className="text-emerald-700">من الخدمي إلى التشريعي</span>
+            <TitleLineBreak />
+            <TitleAccent variant="emerald">من الخدمي إلى التشريعي</TitleAccent>
           </>
         }
         description="نتعامل مع تنوّع كبير من القضايا، ولكل نوع لجنة مختصة وفريق ميداني مدرّب."

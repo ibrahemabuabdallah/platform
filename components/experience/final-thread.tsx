@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, Search, ShieldCheck, Phone } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
 import { Button } from "@/components/ui/button";
+import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { Magnetic } from "./magnetic";
 
 export function FinalThread() {
@@ -81,13 +82,11 @@ export function FinalThread() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-6 font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-balance"
+            className="mt-6 font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1]"
           >
             صوتك يبدأ من هنا.
-            <br className="hidden sm:block" />
-            <span className="bg-gradient-to-l from-gold-300 via-gold-400 to-gold-200 bg-clip-text text-transparent">
-              والحلّ يصلك حتى الباب.
-            </span>
+            <TitleLineBreak />
+            <TitleAccent variant="gold-light">والحلّ يصلك حتى الباب.</TitleAccent>
           </motion.h2>
 
           <motion.p

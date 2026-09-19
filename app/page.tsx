@@ -8,7 +8,6 @@ import { CityPulse } from "@/components/v3/city-pulse";
 import { ClosingCta } from "@/components/v3/closing-cta";
 
 export const metadata: Metadata = {
-  title: "الرئيسية",
   description:
     "منصة نبض الأمة — قدّم شكواك أو مقترحك، تتبّع رقمك المرجعي، وشاهد نبض مدينتك لحظة بلحظة.",
 };

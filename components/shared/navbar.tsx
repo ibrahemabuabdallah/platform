@@ -35,8 +35,20 @@ export function Navbar() {
   const links = isWorkspace ? workspaceLinks : publicLinks;
   // الرئيسية فقط: الهيدر يطفو شفافاً فوق فيديو الهيرو
   const isHome = pathname === "/";
+  // على الرئيسية: شفاف بالأعلى، ويعود مصمتاً عند النزول
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => setIsOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const transparent = isHome && !scrolled;
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -56,32 +68,33 @@ export function Navbar() {
 
   return (
     <>
-      <header className={cn("top-0 z-40", isHome ? "absolute inset-x-0" : "sticky")}>
-        {/* تدرّج قراءة أعلى الفيديو — الرئيسية فقط */}
-        {isHome && (
+      <header className={cn("top-0 z-40", isHome ? "fixed inset-x-0" : "sticky")}>
+        {/* تدرّج قراءة أعلى الفيديو — بالحالة الشفافة فقط */}
+        {transparent && (
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-emerald-950/85 via-emerald-950/40 to-transparent"
           />
         )}
-        {/* Main bar — solid on inner pages, transparent over the hero on home */}
+        {/* Main bar — solid on inner pages and after scrolling home, transparent over the hero at top */}
         <div
           className={cn(
-            "relative border-b",
-            isHome
+            "relative border-b transition-colors duration-300",
+            transparent
               ? "border-transparent"
-              : "overflow-hidden border-gold-500/30 bg-emerald-950 shadow-[0_18px_40px_-18px_rgba(2,44,34,.85)]"
+              : "border-gold-500/30 bg-emerald-950 shadow-[0_18px_40px_-18px_rgba(2,44,34,.85)]",
+            !isHome && "overflow-hidden"
           )}
         >
           {/* Faint emblem engraving — decorative only */}
-          {!isHome && (
+          {!transparent && (
             <div
               aria-hidden
               className="emblem-pattern-dark pointer-events-none absolute inset-0 opacity-[0.05]"
             />
           )}
           {/* Deep seal shadow line under the bar */}
-          {!isHome && (
+          {!transparent && (
             <span
               aria-hidden
               className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-l from-transparent via-gold-400/70 to-transparent"
@@ -95,7 +108,7 @@ export function Navbar() {
                 onClick={() => setIsOpen(true)}
                 className={cn(
                   "inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold-500/30 text-white transition hover:bg-white/10 xl:hidden",
-                  isHome && "translate-y-3"
+                  isHome && "translate-y-1.5"
                 )}
                 aria-label="فتح قائمة التنقل"
                 aria-expanded={isOpen}
@@ -114,7 +127,7 @@ export function Navbar() {
                 aria-label="الرئيسية"
                 className={cn(
                   "absolute left-1/2 -translate-x-1/2 xl:hidden",
-                  isHome && "top-full -translate-y-1/2"
+                  isHome && "top-full -translate-y-2/3"
                 )}
               >
                 <Image
@@ -126,7 +139,7 @@ export function Navbar() {
                   className={cn(
                     "rounded-full",
                     isHome
-                      ? "h-auto w-[min(72vw,260px)] bg-white/90 px-4 py-2.5 shadow-[0_0_24px_2px_rgba(255,255,255,.3)] backdrop-blur-md"
+                      ? "h-auto w-[min(54vw,180px)] bg-white/95 px-4 py-2.5 shadow-[0_0_24px_2px_rgba(255,255,255,.3)] backdrop-blur-md"
                       : "h-14 w-auto bg-white px-3 py-1.5 shadow-sm"
                   )}
                 />
@@ -174,7 +187,7 @@ export function Navbar() {
 
               <div className="flex items-center gap-2">
                 {/* الهاتف: جرس الإشعارات بأقصى اليسار */}
-                <div className={cn("xl:hidden", isHome && "translate-y-3")}>
+                <div className={cn("xl:hidden", isHome && "translate-y-1.5")}>
                   <NotificationsBell />
                 </div>
                 {/* زر التقديم على الكمبيوتر فقط — على الهاتف موجود داخل القائمة الجانبية */}

@@ -35,7 +35,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ?? "https://nabdalomah.al-khayal.store"
   ),
-  title: "نبض الأمة | منصة خدمة المواطنين",
+  title: {
+    default: "منصة نبض الأمة - صوت المواطن",
+    template: "%s | نبض الأمة",
+  },
   description:
     "منصة ذكية لإدارة الشكاوى والمقترحات من الاستقبال حتى التدخل الميداني. صوتك يصل، شكواك تُحلّ.",
   keywords: ["شكاوى", "مقترحات", "خدمة المواطن", "تدخل ميداني"],

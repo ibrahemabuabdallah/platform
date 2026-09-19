@@ -195,12 +195,18 @@ function HeatMap() {
 
   return (
     <div className="relative rounded-3xl border border-emerald-100 bg-white p-4 shadow-soft-md lg:col-span-3 lg:p-5">
-      <div className="mb-2 flex items-center justify-between px-1">
-        <p className="inline-flex items-center gap-2 font-display text-sm font-bold text-stone-900">
-          <MapPin aria-hidden className="h-4 w-4 text-emerald-700" />
-          خريطة التغطية الوطنية
-        </p>
-        <p className="text-[11px] text-stone-500">مرّر فوق أي محافظة</p>
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2 px-1">
+        <div>
+          <p className="inline-flex items-center gap-2 font-display text-sm font-bold text-stone-900">
+            <MapPin aria-hidden className="h-4 w-4 text-emerald-700" />
+            خريطة التغطية الوطنية
+          </p>
+          <p className="mt-1 text-[11px] text-stone-500">مرّر فوق أي محافظة</p>
+        </div>
+        <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-l from-emerald-600 to-emerald-800 px-4 py-1.5 font-display text-xs font-extrabold text-white shadow-emerald-glow sm:text-sm">
+          <Building2 aria-hidden className="h-4 w-4 text-gold-300" />
+          عبر <span className="number-mono text-base font-extrabold text-gold-300 sm:text-lg">43</span> فرع حول الأردن
+        </span>
       </div>
 
       <div className="grid items-center gap-4 sm:grid-cols-2">
@@ -208,7 +214,7 @@ function HeatMap() {
           viewBox="0 0 100 110"
           className="h-auto w-full"
           role="img"
-          aria-label="خريطة الأردن الحرارية لكثافة البلاغات"
+          aria-label="خريطة الأردن الحرارية لكثافة البلاغات عبر 43 فرعاً حول الأردن"
         >
           <defs>
             <linearGradient id="v3-map-fill" x1="0" y1="0" x2="0" y2="1">

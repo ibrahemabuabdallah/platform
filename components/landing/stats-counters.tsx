@@ -124,10 +124,11 @@ export function StatsCounters() {
     <SectionShell
       number="05"
       label="أرقام تصنع الفرق"
-      tone="white"
-      aurora="gold"
+      tone="dark-mesh"
+      aurora="both"
     >
       <SectionHeader
+        tone="dark"
         badge={
           <SectionTag icon={TrendingUp} variant="gold">
             <span>أرقام تصنع الفرق</span>
@@ -137,7 +138,7 @@ export function StatsCounters() {
           <>
             منصة تعمل بالأرقام
             <TitleLineBreak />
-            <TitleAccent variant="emerald">وتصنع نتائج ملموسة</TitleAccent>
+            <TitleAccent variant="gold-light">وتصنع نتائج ملموسة</TitleAccent>
           </>
         }
         description="إحصائيات حية تعكس أثر المنصة في حياة المواطنين على مستوى المملكة."

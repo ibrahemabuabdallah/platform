@@ -144,6 +144,10 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.7s ease both",
@@ -154,6 +158,7 @@ const config: Config = {
         "spin-slow": "spin-slow 8s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "gradient-shift": "gradient-shift 7s ease-in-out infinite",
       },
       boxShadow: {
         "soft-sm": "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03)",
@@ -163,6 +168,10 @@ const config: Config = {
           "0 4px 16px rgba(4,120,87,0.25), 0 2px 6px rgba(4,120,87,0.15)",
         "gold-glow":
           "0 4px 16px rgba(201,162,39,0.3), 0 2px 6px rgba(201,162,39,0.18)",
+        "gold-glow-lg":
+          "0 8px 28px rgba(201,162,39,0.4), 0 3px 10px rgba(201,162,39,0.24)",
+        "emerald-glow-lg":
+          "0 10px 32px rgba(4,120,87,0.35), 0 4px 12px rgba(4,120,87,0.2)",
       },
     },
   },

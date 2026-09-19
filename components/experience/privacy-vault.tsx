@@ -10,7 +10,7 @@ import {
 import {
   ShieldCheck,
   Lock,
-  EyeOff,
+  FileLock2,
   Fingerprint,
   KeySquare,
 } from "lucide-react";
@@ -18,9 +18,9 @@ import { TitleAccent } from "@/components/shared/title-accent";
 
 const POINTS = [
   {
-    icon: EyeOff,
-    title: "تقديم مجهول مدعوم",
-    desc: "يمكنك تقديم الشكوى دون كشف اسمك أو رقمك — فقط الجهة المختصة ترى الموقع التقريبي.",
+    icon: FileLock2,
+    title: "المرفقات تابعة للملف",
+    desc: "الصور والمستندات تبقى مرتبطة بالقضية وحدها، وتُستخدم لإثبات المشكلة لا لغير ذلك.",
   },
   {
     icon: Lock,

@@ -77,16 +77,17 @@ export function SLASection() {
     <SectionShell
       number="10"
       label="SLA والتصعيد"
-      tone="white"
-      aurora="none"
+      tone="dark-mesh"
+      aurora="both"
     >
       <SectionHeader
+        tone="dark"
         badge={<SectionTag icon={Clock}>مستوى الخدمة والتصعيد</SectionTag>}
         title={
           <>
             لكل قضية موعد استجابة
             <TitleLineBreak />
-            <TitleAccent variant="emerald">ومسار تصعيد واضح</TitleAccent>
+            <TitleAccent variant="gold-light">ومسار تصعيد واضح</TitleAccent>
           </>
         }
         description="نلتزم بمعايير زمنية صارمة لكل أولوية، مع آلية تصعيد آلية في حال التأخر."
@@ -94,7 +95,7 @@ export function SLASection() {
 
       <div className="max-w-6xl mx-auto">
         <div className="hidden md:block relative pt-6 pb-2 px-4">
-          <div className="absolute top-[44px] left-[8%] right-[8%] h-1 rounded-full bg-gradient-to-l from-stone-200 via-amber-200 via-orange-200 to-red-200" />
+          <div className="absolute top-[44px] left-[8%] right-[8%] h-1 rounded-full bg-gradient-to-l from-white/25 via-amber-300/50 via-orange-300/50 to-red-400/60" />
 
           <div className="grid grid-cols-4 gap-4 relative">
             {slaLevels.map((sla, i) => (
@@ -121,13 +122,13 @@ export function SLASection() {
                   أولوية {sla.priority}
                 </span>
 
-                <div className="font-display text-xl lg:text-2xl font-extrabold text-stone-900 mb-1 number-mono">
+                <div className="font-display text-xl lg:text-2xl font-extrabold text-white mb-1 number-mono">
                   {sla.time}
                 </div>
-                <p className="text-xs text-stone-500 leading-relaxed mb-3 max-w-[160px]">
+                <p className="text-xs text-white/70 leading-relaxed mb-3 max-w-[160px]">
                   {sla.response}
                 </p>
-                <div className="inline-flex items-center gap-1 text-[10px] text-stone-400">
+                <div className="inline-flex items-center gap-1 text-[10px] text-white/50">
                   <ArrowUpFromLine className="h-2.5 w-2.5" />
                   {sla.escalation}
                 </div>

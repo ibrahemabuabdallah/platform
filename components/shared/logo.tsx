@@ -23,16 +23,20 @@ export function Logo({
     <div className={cn("flex items-center gap-3", className)}>
       <div
         className={cn(
-          "relative flex shrink-0 items-center justify-center rounded-xl overflow-hidden",
-          isCompact ? "h-9 w-9" : "h-11 w-11"
+          "relative flex shrink-0 items-center justify-center",
+          isLight &&
+            "rounded-xl bg-[#f7f3e9] px-2.5 py-1.5 shadow-sm ring-1 ring-white/10"
         )}
       >
         <Image
           src="/logo.png"
           alt={PLATFORM_NAME}
-          width={64}
-          height={64}
-          className="h-full w-full object-contain"
+          width={585}
+          height={195}
+          className={cn(
+            "w-auto object-contain",
+            isCompact ? "h-8" : "h-9"
+          )}
           priority
         />
       </div>

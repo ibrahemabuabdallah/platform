@@ -1,131 +1,49 @@
-"use client";
+import { ArrowLeft, Eye, Route, ScanSearch } from "lucide-react";
+import Link from "next/link";
 
-import { motion } from "framer-motion";
-import { Inbox, Users, ShieldCheck } from "lucide-react";
-import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
-import { Card } from "@/components/ui/card";
-import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
-import { SectionShell } from "./section-shell";
-import { SectionTag, SectionHeader } from "./section-tag";
-
-const features = [
-  {
-    num: "01",
-    icon: Inbox,
-    title: "استقبال ذكي",
-    description:
-      "نموذج تقديم بسيط في دقيقتين، بدون تسجيل دخول، مع دعم التقديم المجهول وكشف القضايا المكررة فور الاستلام.",
-    color: "emerald" as const,
-    accent: "emerald-100",
-  },
-  {
-    num: "02",
-    icon: AiSparkleIcon,
-    title: "تصنيف وتوجيه آلي",
-    description:
-      "محرك تصنيف ذكي يحدد نوع القضية والأولوية ويوجهها للفرع أو اللجنة المختصة بنسبة ثقة أعلى من 90%، مع كشف فوري للتكرار وإسناد المنسق المناسب.",
-    color: "gold" as const,
-    accent: "gold-200",
-    featured: true,
-  },
-  {
-    num: "03",
-    icon: Users,
-    title: "تدخل ميداني فعلي",
-    description:
-      "منسق معتمد ينزل إلى الميدان، يوثّق القضية، ويتدخل عبر القنوات الرسمية لإغلاقها بنجاح.",
-    color: "emerald" as const,
-    accent: "emerald-100",
-  },
+const values = [
+  { icon: Eye, title: "شفافية قبل الوعود", text: "ترى المرحلة والمسؤول والزمن المتوقع بدل رسالة «قيد المتابعة»." },
+  { icon: ScanSearch, title: "توجيه من أول مرة", text: "يساعد التصنيف الذكي على تقليل التحويلات ووصول الطلب إلى الاختصاص." },
+  { icon: Route, title: "رحلة واحدة مترابطة", text: "من التسجيل إلى الميدان والإغلاق، كل خطوة في سجل واحد." },
 ];
 
 export function WhatIs() {
   return (
-    <SectionShell number="02" label="ما هي المنصة" tone="white" aurora="none">
-      <SectionHeader
-        badge={<SectionTag icon={ShieldCheck}>منظومة متكاملة</SectionTag>}
-        title={
-          <>
-            منظومة متكاملة تربط
-            <TitleLineBreak />
-            <TitleAccent variant="emerald">الصوت بالحل</TitleAccent>
-          </>
-        }
-        description="ليست مجرد نموذج استقبال — بل بنية رقمية كاملة تحوّل كل شكوى إلى رحلة موثقة من البداية للنهاية."
-      />
+    <section className="content-auto bg-white py-20 lg:py-28">
+      <div className="container">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <span className="civic-kicker">ليست صندوق شكاوى</span>
+            <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.15] text-emerald-950 sm:text-5xl">
+              منصة تشغيل تبدأ من المواطن.
+            </h2>
+            <div className="emblem-rule mt-6 max-w-xs" aria-hidden>
+              <span />
+            </div>
+            <p className="mt-5 max-w-xl text-base leading-8 text-stone-600">
+              صُممت لتقليل الغموض بين إرسال الطلب وحدوث الإجراء، ولتعطي كل طرف صورة واضحة عمّا يجب أن يحدث بعد ذلك.
+            </p>
+            <Link href="#journey" className="mt-7 inline-flex items-center gap-2 text-sm font-extrabold text-emerald-800">
+              شاهد رحلة الطلب <ArrowLeft className="h-4 w-4" />
+            </Link>
+          </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
-        {features.map((feature, i) => (
-          <motion.div
-            key={feature.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className={feature.featured ? "lg:col-span-2 lg:row-span-1" : ""}
-          >
-            <Card
-              className={`p-6 lg:p-7 h-full hover:shadow-soft-lg transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden ${
-                feature.featured
-                  ? "border-gold-200/60 bg-gradient-to-br from-white via-white to-gold-50/30"
-                  : ""
-              }`}
-            >
-              <div
-                className={`absolute -top-12 -left-12 w-32 h-32 rounded-full opacity-10 group-hover:opacity-20 transition-opacity ${
-                  feature.color === "emerald"
-                    ? "bg-emerald-600"
-                    : "bg-gold-500"
-                }`}
-              />
-
-              <span
-                aria-hidden
-                className={`absolute top-4 left-4 font-display font-extrabold text-3xl lg:text-4xl select-none ${
-                  feature.color === "emerald"
-                    ? "text-emerald-100"
-                    : "text-gold-200"
-                } opacity-70`}
-              >
-                {feature.num}
-              </span>
-
-              <div className="relative">
-                <div
-                  className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl mb-5 ${
-                    feature.color === "emerald"
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-gold-100 text-gold-700"
-                  }`}
-                >
-                  <feature.icon className="h-6 w-6" />
+          <div className="divide-y divide-emerald-950/10 lg:col-span-7">
+            {values.map((item, index) => (
+              <article key={item.title} className="grid gap-4 py-7 first:pt-0 sm:grid-cols-[64px_1fr] lg:py-8">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-950 text-gold-300">
+                  <item.icon className="h-5 w-5" />
                 </div>
-                <h3
-                  className={`font-display font-bold text-stone-900 mb-2 ${
-                    feature.featured ? "text-xl lg:text-2xl" : "text-lg"
-                  }`}
-                >
-                  {feature.title}
-                </h3>
-                <p
-                  className={`text-stone-600 leading-relaxed ${
-                    feature.featured ? "text-sm lg:text-base" : "text-sm"
-                  }`}
-                >
-                  {feature.description}
-                </p>
-
-                {feature.featured && (
-                  <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-gold-100/70 border border-gold-200 px-3 py-1 text-[11px] font-display font-bold text-gold-800">
-                    <AiSparkleIcon className="h-3 w-3" />
-                    القلب الذكي للمنصة
-                  </div>
-                )}
-              </div>
-            </Card>
-          </motion.div>
-        ))}
+                <div>
+                  <span className="font-mono text-xs text-gold-700">0{index + 1}</span>
+                  <h3 className="mt-2 font-display text-xl font-extrabold text-emerald-950">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-stone-600">{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
-    </SectionShell>
+    </section>
   );
 }

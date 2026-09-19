@@ -35,7 +35,7 @@ export default function DashboardStudioPage() {
   return (
     <StudioShell
       badge="استوديو القيادة — تجربة جديدة"
-      title="غرفة عمليات صوتك"
+      title="غرفة عمليات نبض الأمة"
       description="مشهد بصري حي يجمع المؤشرات والقضايا والفروع في تجربة واحدة، مع نبض حقيقي لما يحدث في المنصة الآن."
       pulseSlot={<StudioPulseSpine />}
     >

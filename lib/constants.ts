@@ -176,6 +176,6 @@ export const SLA_HOURS: Record<Priority, number> = {
   low: 120,
 };
 
-export const PLATFORM_NAME = "صوتك";
-export const PLATFORM_TAGLINE = "منصة خدمة المواطن";
-export const PLATFORM_FULL_NAME = "صوتك — منصة خدمة المواطن";
+export const PLATFORM_NAME = "نبض الأمة";
+export const PLATFORM_TAGLINE = "منصة خدمة المواطنين";
+export const PLATFORM_FULL_NAME = "نبض الأمة — منصة خدمة المواطنين";

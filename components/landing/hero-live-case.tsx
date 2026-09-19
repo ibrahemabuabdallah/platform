@@ -29,30 +29,30 @@ const STAGES: Stage[] = [
     label: "استلام الشكوى",
     Icon: Inbox,
     detail: () => "تم استقبالها وحُفظت ضمن السجلّ الوطني",
-    badgeBg: "bg-sky-50",
-    badgeText: "text-sky-700",
-    badgeBorder: "border-sky-200",
-    ringColor: "ring-sky-200",
+    badgeBg: "bg-emerald-50",
+    badgeText: "text-emerald-800",
+    badgeBorder: "border-emerald-100",
+    ringColor: "ring-emerald-100",
     timeOffset: () => "00:00:00",
   },
   {
     label: "تصنيف ذكي",
     Icon: () => <AiSparkleIcon className="h-4 w-4" />,
     detail: (c) => `صُنّفت بدقة 94% — ${c.category}`,
-    badgeBg: "bg-violet-50",
-    badgeText: "text-violet-700",
-    badgeBorder: "border-violet-200",
-    ringColor: "ring-violet-200",
+    badgeBg: "bg-gold-50",
+    badgeText: "text-gold-800",
+    badgeBorder: "border-gold-200",
+    ringColor: "ring-gold-200",
     timeOffset: () => "00:14:23",
   },
   {
     label: "إسناد ميداني",
     Icon: MapPin,
     detail: (c) => `أُسندت إلى فرع ${c.governorate}`,
-    badgeBg: "bg-amber-50",
-    badgeText: "text-amber-700",
-    badgeBorder: "border-amber-200",
-    ringColor: "ring-amber-200",
+    badgeBg: "bg-emerald-50",
+    badgeText: "text-emerald-800",
+    badgeBorder: "border-emerald-100",
+    ringColor: "ring-emerald-100",
     timeOffset: () => "02:40:11",
   },
   {
@@ -117,10 +117,11 @@ export function HeroLiveCase() {
       />
 
       <motion.article
+        aria-live="polite"
         initial={{ opacity: 0, y: 24, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="relative rounded-3xl bg-white/95 backdrop-blur-md hero-card-glow overflow-hidden"
+        className="relative overflow-hidden rounded-3xl bg-white hero-card-glow"
       >
         {/* Subtle gold corner accent */}
         <div

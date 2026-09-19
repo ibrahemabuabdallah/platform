@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, EyeOff, Lock, Trash2 } from "lucide-react";
+import { ShieldCheck, FileLock2, Lock, Trash2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
 import { SectionShell } from "./section-shell";
@@ -9,10 +9,10 @@ import { SectionTag, SectionHeader } from "./section-tag";
 
 const items = [
   {
-    icon: EyeOff,
-    title: "تقديم مجهول الهوية",
+    icon: FileLock2,
+    title: "المرفقات تابعة للملف",
     description:
-      "تستطيع تقديم شكواك بدون اسم أو رقم هاتف، نحن نهتم بالقضية لا بهويتك.",
+      "الصور والمستندات تبقى مرتبطة بالقضية وحدها، وتُستخدم لإثبات المشكلة لا لغير ذلك.",
   },
   {
     icon: Lock,

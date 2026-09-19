@@ -145,7 +145,7 @@ export function FinalThread() {
           >
             <span className="flex items-center gap-2">
               <ShieldCheck className="h-4 w-4 text-gold-400" />
-              تقديم مجهول مدعوم
+              بيانات مشفّرة بالكامل
             </span>
             <span className="hidden sm:block h-1 w-1 rounded-full bg-white/30" />
             <span className="flex items-center gap-2">

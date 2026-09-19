@@ -1,6 +1,8 @@
-# صوتك — منصة خدمة المواطن
+# نبض الأمة — منصة خدمة المواطنين
 
 > Prototype / UI Simulation كامل لمنصة إدارة الشكاوى والمقترحات والتدخلات الميدانية
+
+**الدومين الرسمي:** [https://nabdalomah.al-khayal.store](https://nabdalomah.al-khayal.store)
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)

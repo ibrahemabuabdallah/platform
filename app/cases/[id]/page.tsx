@@ -23,7 +23,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  ShieldAlert,
   AlertCircle,
   Tag,
 } from "lucide-react";
@@ -249,44 +248,28 @@ export default function CaseDetailPage() {
               <h3 className="font-display font-bold text-base text-stone-900 mb-4">
                 بيانات المُقدِّم
               </h3>
-              {citizen?.isAnonymous ? (
-                <div className="rounded-xl bg-emerald-50/40 border border-emerald-100 p-4 flex items-center gap-3">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-                    <ShieldAlert className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="font-display font-bold text-sm text-stone-900">
-                      تقديم مجهول الهوية
-                    </p>
-                    <p className="text-xs text-stone-500">
-                      {citizen.governorate} · {citizen.district}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <InfoRow icon={User} label="الاسم" value={citizen?.name} />
+              <div className="grid sm:grid-cols-2 gap-3">
+                <InfoRow icon={User} label="الاسم" value={citizen?.name} />
+                <InfoRow
+                  icon={Phone}
+                  label="الهاتف"
+                  value={citizen?.phone}
+                  dir="ltr"
+                />
+                {citizen?.email && (
                   <InfoRow
-                    icon={Phone}
-                    label="الهاتف"
-                    value={citizen?.phone}
+                    icon={Mail}
+                    label="البريد"
+                    value={citizen.email}
                     dir="ltr"
                   />
-                  {citizen?.email && (
-                    <InfoRow
-                      icon={Mail}
-                      label="البريد"
-                      value={citizen.email}
-                      dir="ltr"
-                    />
-                  )}
-                  <InfoRow
-                    icon={MapPin}
-                    label="العنوان"
-                    value={`${citizen?.governorate} - ${citizen?.district}`}
-                  />
-                </div>
-              )}
+                )}
+                <InfoRow
+                  icon={MapPin}
+                  label="العنوان"
+                  value={`${citizen?.governorate} - ${citizen?.district}`}
+                />
+              </div>
             </Card>
 
             {/* AI Classification */}

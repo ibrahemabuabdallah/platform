@@ -1,147 +1,75 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  FileText,
-  Hash,
-  UserCheck,
-  MapPin,
-  Hammer,
-  CheckCircle2,
-  GitBranch,
-} from "lucide-react";
-import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
-import { TitleAccent, TitleLineBreak } from "@/components/shared/title-accent";
+import { CheckCircle2, FileText, MapPin, ScanSearch } from "lucide-react";
 import { SectionShell } from "./section-shell";
-import { SectionTag, SectionHeader } from "./section-tag";
+import { SectionHeader, SectionTag } from "./section-tag";
 
 const steps = [
-  { icon: FileText, title: "تقديم الطلب", desc: "نموذج بسيط في دقيقتين" },
-  { icon: Hash, title: "رقم مرجعي فوري", desc: "تتبع طلبك بأي وقت" },
   {
-    icon: AiSparkleIcon,
-    title: "تصنيف وتوجيه",
-    desc: "محرك ذكي يحدد الجهة المختصة",
+    icon: FileText,
+    number: "٠١",
+    title: "أرسل التفاصيل",
+    description: "نموذج واضح يحفظ حقك ويمنحك رقمًا مرجعيًا فورًا.",
   },
-  { icon: UserCheck, title: "متابعة منسق الفرع", desc: "تواصل وجمع المعلومات" },
+  {
+    icon: ScanSearch,
+    number: "٠٢",
+    title: "تصنيف ذكي",
+    description: "تُقرأ القضية وتُصنّف وتُوجّه إلى الجهة الأقرب للاختصاص.",
+  },
   {
     icon: MapPin,
-    title: "نزول ميداني",
-    desc: "معاينة وتوثيق المشكلة",
+    number: "٠٣",
+    title: "تحرّك ميداني",
+    description: "تظهر لك الجهة المسؤولة ومرحلة التنفيذ والزمن المتوقع.",
   },
-  { icon: Hammer, title: "تدخل مختص", desc: "حل عملي عبر القنوات الرسمية" },
-  { icon: CheckCircle2, title: "إغلاق وتوثيق", desc: "إخطار المواطن وحفظ السجل" },
+  {
+    icon: CheckCircle2,
+    number: "٠٤",
+    title: "حل موثّق",
+    description: "لا تُغلق القضية قبل توثيق الإجراء وإتاحة النتيجة للمتابعة.",
+  },
 ];
 
 export function JourneyTimeline() {
   return (
-    <SectionShell number="03" label="رحلة القضية" tone="white" aurora="gold">
-      <SectionHeader
-        badge={<SectionTag icon={GitBranch}>كيف يعمل النظام</SectionTag>}
-        title={
-          <>
-            من الشكوى إلى الحل
-            <TitleLineBreak />
-            <TitleAccent variant="emerald">في 7 خطوات موثقة</TitleAccent>
-          </>
-        }
-        description="رحلة كل قضية مرئية بالكامل — لا بيروقراطية، لا غموض، فقط شفافية تامة من الإرسال حتى الإغلاق."
-      />
+    <SectionShell id="journey" number="٠١" label="رحلة الطلب" tone="white">
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <SectionHeader
+          align="right"
+          className="mb-0 lg:col-span-4"
+          badge={<SectionTag>من الصوت إلى الأثر</SectionTag>}
+          title={<>أربع محطات.<br />مسار واحد واضح.</>}
+          description="كل خطوة مصممة لتجيب عن السؤال الأهم: أين وصل طلبي الآن؟"
+        />
 
-      <div className="hidden lg:block">
-        <div className="relative pt-2">
-          <svg
-            className="absolute top-12 right-0 left-0 w-full pointer-events-none"
-            viewBox="0 0 1000 80"
-            preserveAspectRatio="none"
-            height="80"
-          >
-            <defs>
-              <linearGradient id="curve-gold" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#047857" stopOpacity="0.3" />
-                <stop offset="20%" stopColor="#c9a227" stopOpacity="0.55" />
-                <stop offset="50%" stopColor="#e8c547" stopOpacity="0.85" />
-                <stop offset="80%" stopColor="#c9a227" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="#047857" stopOpacity="0.3" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M 60 40 Q 200 0, 360 40 T 660 40 T 940 40"
-              fill="none"
-              stroke="url(#curve-gold)"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeDasharray="6 8"
-            />
-          </svg>
-
-          <div className="grid grid-cols-7 gap-4 relative">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="text-center relative"
-              >
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <div className="w-24 h-24 rounded-full bg-white border-2 border-emerald-100 flex items-center justify-center shadow-soft-md hover:border-emerald-500 hover:shadow-emerald-glow transition-all">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-50 to-white flex items-center justify-center">
-                      <step.icon className="h-6 w-6 text-emerald-700" />
-                    </div>
-                  </div>
-                  <div className="absolute -top-1 -end-1 w-7 h-7 bg-gradient-to-br from-emerald-700 to-emerald-800 text-white text-xs font-bold rounded-full flex items-center justify-center font-display border-2 border-white shadow-soft-sm">
-                    {i + 1}
-                  </div>
-                </div>
-                <h4 className="font-display font-bold text-sm text-stone-900 mb-1">
-                  {step.title}
-                </h4>
-                <p className="text-xs text-stone-500 leading-snug">
-                  {step.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="lg:hidden">
-        <div className="relative">
-          <div className="absolute end-[47px] top-0 bottom-0 w-px bg-gradient-to-b from-emerald-200 via-gold-300 to-emerald-200" />
-          <ul className="space-y-5">
-            {steps.map((step, i) => (
-              <motion.li
-                key={step.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="flex gap-4 items-start"
-              >
-                <div className="relative shrink-0">
-                  <div className="w-24 h-24 rounded-full bg-white border-2 border-emerald-100 flex items-center justify-center shadow-soft-md">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-50 to-white flex items-center justify-center">
-                      <step.icon className="h-6 w-6 text-emerald-700" />
-                    </div>
-                  </div>
-                  <div className="absolute -top-1 -end-1 w-7 h-7 bg-gradient-to-br from-emerald-700 to-emerald-800 text-white text-xs font-bold rounded-full flex items-center justify-center font-display border-2 border-white">
-                    {i + 1}
-                  </div>
-                </div>
-                <div className="flex-1 pt-3">
-                  <h4 className="font-display font-bold text-base text-stone-900 mb-1">
-                    {step.title}
-                  </h4>
-                  <p className="text-sm text-stone-500 leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              </motion.li>
-            ))}
-          </ul>
-        </div>
+        <ol className="relative grid gap-4 sm:grid-cols-2 lg:col-span-8">
+          {steps.map((step, index) => (
+            <motion.li
+              key={step.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ delay: index * 0.08 }}
+              className="civic-card emblem-frame corner-marks group relative min-h-64 overflow-hidden p-6 transition-transform duration-500 hover:-translate-y-1 lg:p-7"
+            >
+              <span className="absolute end-5 top-4 font-mono text-5xl font-bold text-emerald-950/[.055]">
+                {step.number}
+              </span>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-950 text-gold-300">
+                <step.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-10 font-display text-2xl font-extrabold text-emerald-950">
+                {step.title}
+              </h3>
+              <p className="mt-3 text-base leading-7 text-stone-600">
+                {step.description}
+              </p>
+              <span className="absolute inset-x-6 bottom-0 h-1 origin-right scale-x-0 rounded-full bg-gold-400 transition-transform duration-500 group-hover:scale-x-100" />
+            </motion.li>
+          ))}
+        </ol>
       </div>
     </SectionShell>
   );

@@ -249,7 +249,7 @@ export function CinematicHero() {
             className="mt-8 flex items-center justify-center gap-3 text-xs text-white/60"
           >
             <ShieldCheck className="h-4 w-4 text-gold-400" />
-            <span>التقديم المجهول مدعوم · بياناتك محمية بالكامل</span>
+            <span>بياناتك محمية بالكامل ومشفّرة</span>
           </motion.div>
         </div>
       </div>

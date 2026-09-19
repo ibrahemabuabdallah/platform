@@ -19,11 +19,15 @@ export function PageHeader({
   return (
     <div
       className={cn(
-        "relative overflow-hidden border-b border-border bg-white",
+        "relative overflow-hidden border-b border-gold-200/40 gradient-mesh-light",
         className
       )}
     >
-      <div className="grid-pattern-light absolute inset-0 opacity-50 pointer-events-none" />
+      <div className="grid-pattern-light absolute inset-0 opacity-40 pointer-events-none" />
+      <div
+        aria-hidden
+        className="aurora-section-gold absolute -top-24 left-[-8%] w-[45%] h-[130%] pointer-events-none"
+      />
       <div className="container relative py-8 lg:py-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
           <div className="flex-1 min-w-0">

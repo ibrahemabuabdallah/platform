@@ -39,10 +39,9 @@ export type UserRole =
 
 export interface Citizen {
   id: string;
-  name?: string;
-  phone?: string;
+  name: string;
+  phone: string;
   email?: string;
-  isAnonymous: boolean;
   governorate: string;
   district?: string;
 }

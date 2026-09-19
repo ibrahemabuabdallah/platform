@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -14,7 +13,6 @@ import {
   AlertCircle,
   CalendarClock,
 } from "lucide-react";
-import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -27,37 +25,15 @@ import {
   CaseTypeBadge,
 } from "@/components/shared/status-badge";
 import { Timeline } from "@/components/shared/timeline";
-import { cases } from "@/data/cases";
 import { branches } from "@/data/branches";
 import { coordinators } from "@/data/coordinators";
 import { formatDateTimeAr } from "@/lib/utils";
+import { SAMPLE_REFS, useTrackLookup } from "@/hooks/use-track-lookup";
 import type { Case } from "@/types";
 
-const sampleRefs = ["REF-2026-00482", "REF-2026-00483", "REF-2026-00488"];
-
 export default function TrackPage() {
-  const [query, setQuery] = useState("");
-  const [result, setResult] = useState<Case | null | "not_found">(null);
-  const [loading, setLoading] = useState(false);
-
-  const handleSearch = (refValue?: string) => {
-    const ref = (refValue ?? query).trim().toUpperCase();
-    if (!ref) {
-      toast.error("الرجاء إدخال الرقم المرجعي");
-      return;
-    }
-    setLoading(true);
-    setResult(null);
-
-    setTimeout(() => {
-      const found = cases.find((c) => c.ref === ref);
-      setResult(found || "not_found");
-      setLoading(false);
-      if (found) {
-        toast.success("تم العثور على القضية");
-      }
-    }, 600);
-  };
+  const { query, setQuery, result, loading, search, searchRef } =
+    useTrackLookup();
 
   return (
     <>
@@ -68,9 +44,9 @@ export default function TrackPage() {
       />
 
       <div className="container py-8 lg:py-12 max-w-3xl">
-        <Card className="p-6 lg:p-8">
+        <Card className="p-6 lg:p-8 hero-card-glow">
           <div className="text-center mb-6">
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700 mb-3">
+            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-emerald-800 text-white shadow-emerald-glow mb-3">
               <Search className="h-6 w-6" />
             </div>
             <h2 className="font-display font-bold text-xl text-stone-900 mb-1">
@@ -88,7 +64,7 @@ export default function TrackPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSearch();
+                  if (e.key === "Enter") search();
                 }}
                 placeholder="مثال: REF-2026-00482"
                 dir="ltr"
@@ -98,7 +74,7 @@ export default function TrackPage() {
             </div>
             <Button
               size="lg"
-              onClick={() => handleSearch()}
+              onClick={() => search()}
               disabled={loading}
               className="sm:px-8"
             >
@@ -118,14 +94,11 @@ export default function TrackPage() {
 
           <div className="mt-5 flex items-center gap-2 flex-wrap">
             <span className="text-xs text-stone-500">جرّب أرقاماً تجريبية:</span>
-            {sampleRefs.map((ref) => (
+            {SAMPLE_REFS.map((ref) => (
               <button
                 key={ref}
                 type="button"
-                onClick={() => {
-                  setQuery(ref);
-                  handleSearch(ref);
-                }}
+                onClick={() => searchRef(ref)}
                 className="inline-flex items-center gap-1 rounded-full bg-stone-100 hover:bg-emerald-50 hover:text-emerald-700 transition-colors px-3 py-1.5 text-xs font-mono min-h-[36px]"
               >
                 {ref}
@@ -233,11 +206,11 @@ function CaseResultCard({ caseData }: { caseData: Case }) {
   );
 
   return (
-    <Card className="overflow-hidden p-0">
-      <div className="bg-gradient-to-r from-emerald-700 to-emerald-800 p-5 text-white">
+    <Card className="overflow-hidden p-0 hero-card-glow">
+      <div className="gradient-panel-emerald p-5 text-white">
         <div className="flex items-start justify-between gap-3 flex-wrap">
           <div className="min-w-0">
-            <p className="text-[11px] text-emerald-200 font-display font-semibold mb-0.5">
+            <p className="text-[11px] text-gold-300 font-display font-semibold mb-0.5">
               الرقم المرجعي
             </p>
             <p className="font-mono font-bold text-base lg:text-lg">

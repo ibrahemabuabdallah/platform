@@ -1,31 +1,32 @@
-import { Hero } from "@/components/landing/hero";
-import { TrustBar } from "@/components/landing/trust-bar";
-import { WhatIs } from "@/components/landing/what-is";
-import { JourneyTimeline } from "@/components/landing/journey-timeline";
-import { AIDemo } from "@/components/landing/ai-demo";
-import { StatsCounters } from "@/components/landing/stats-counters";
-import { HeatmapSection } from "@/components/landing/heatmap-section";
-import { ResolvedMarquee } from "@/components/landing/resolved-marquee";
-import { Categories } from "@/components/landing/categories";
-import { Privacy } from "@/components/landing/privacy";
-import { SLASection } from "@/components/landing/sla-section";
-import { FinalCTA } from "@/components/landing/final-cta";
+import type { Metadata } from "next";
+import { Hero } from "@/components/v3/hero";
+import { NewsTicker } from "@/components/v3/news-ticker";
+import { FeaturesTicker } from "@/components/v3/citizen-features-journey";
+import { LiveRequestDemo } from "@/components/v3/live-request-demo";
+import { CategoriesBento } from "@/components/v3/categories-bento";
+import { CityPulse } from "@/components/v3/city-pulse";
+import { ClosingCta } from "@/components/v3/closing-cta";
 
+export const metadata: Metadata = {
+  title: "الرئيسية",
+  description:
+    "منصة نبض الأمة — قدّم شكواك أو مقترحك، تتبّع رقمك المرجعي، وشاهد نبض مدينتك لحظة بلحظة.",
+};
+
+/**
+ * الرئيسية الجديدة: بنر فيديو سينمائي، شريط مستجدات، مزايا، عرض حي
+ * للتقديم، فئات الشكاوى، نبض المدينة، ثم خاتمة سينمائية بنداء الفعل.
+ */
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
-      <WhatIs />
-      <JourneyTimeline />
-      <AIDemo />
-      <StatsCounters />
-      <HeatmapSection />
-      <ResolvedMarquee />
-      <Categories />
-      <Privacy />
-      <SLASection />
-      <FinalCTA />
+      <NewsTicker />
+      <FeaturesTicker />
+      <LiveRequestDemo />
+      <CategoriesBento />
+      <CityPulse />
+      <ClosingCta />
     </>
   );
 }

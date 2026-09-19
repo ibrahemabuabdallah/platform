@@ -63,9 +63,55 @@
   ::selection {
     @apply bg-emerald-700/20 text-emerald-900;
   }
+  :focus-visible {
+    outline: 3px solid rgba(201, 162, 39, 0.72);
+    outline-offset: 3px;
+  }
 }
 
 @layer components {
+  .skip-link {
+    @apply fixed start-4 top-4 z-50 -translate-y-24 rounded-full bg-emerald-950 px-5 py-3 text-sm font-bold text-white shadow-soft-lg transition-transform;
+  }
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+
+  .civic-surface {
+    background:
+      radial-gradient(circle at 92% 4%, rgba(201, 162, 39, 0.12), transparent 27rem),
+      radial-gradient(circle at 5% 55%, rgba(4, 120, 87, 0.09), transparent 30rem),
+      #f8f5ed;
+  }
+
+  .civic-grid {
+    background-image:
+      linear-gradient(rgba(4, 78, 59, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(4, 78, 59, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 82%);
+    mask-image: linear-gradient(to bottom, black, transparent 82%);
+  }
+
+  .civic-card {
+    @apply rounded-[1.75rem] border border-emerald-950/10 bg-white/90 shadow-[0_24px_70px_-45px_rgba(2,44,34,0.45)];
+  }
+
+  .civic-card-dark {
+    background:
+      radial-gradient(circle at 85% 0%, rgba(201, 162, 39, 0.16), transparent 22rem),
+      linear-gradient(145deg, #042f25 0%, #063e30 55%, #022c22 100%);
+    box-shadow: 0 30px 90px -50px rgba(2, 44, 34, 0.8);
+  }
+
+  .civic-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold-500/25 bg-gold-50/80 px-3 py-1.5 text-xs font-bold text-gold-800;
+  }
+
+  .civic-button-icon {
+    @apply -me-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/10 transition-transform duration-500;
+  }
+
   .gold-line {
     height: 3px;
     background: linear-gradient(
@@ -217,6 +263,161 @@
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
   }
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+
+  /*
+   * Official emblem system — "روح الوثيقة الوطنية".
+   * Double frames, engraved gold rules, corner marks and a faint geometric
+   * pattern derived from the logo's emerald/gold geometry.
+   */
+
+  /* Double frame: thin outer ring + engraved gold inner hairline. */
+  .emblem-frame {
+    position: relative;
+    border: 1px solid rgba(4, 78, 59, 0.16);
+  }
+  .emblem-frame::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(201, 162, 39, 0.28);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Dark variant of the double frame. */
+  .emblem-frame-dark {
+    position: relative;
+    border: 1px solid rgba(232, 197, 71, 0.18);
+  }
+  .emblem-frame-dark::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(232, 197, 71, 0.22);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Engraved gold rule with a center diamond — document divider. */
+  .emblem-rule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .emblem-rule::before,
+  .emblem-rule::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(201, 162, 39, 0.55),
+      transparent
+    );
+  }
+  .emblem-rule > span {
+    width: 7px;
+    height: 7px;
+    transform: rotate(45deg);
+    background: linear-gradient(135deg, #e8c547, #a8861f);
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+  }
+
+  /* Corner marks — official document registration ticks. */
+  .corner-marks {
+    position: relative;
+  }
+  .corner-marks::before,
+  .corner-marks::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-color: rgba(201, 162, 39, 0.55);
+    border-style: solid;
+    pointer-events: none;
+  }
+  .corner-marks::before {
+    top: 10px;
+    inset-inline-start: 10px;
+    border-width: 1.5px 0 0 1.5px;
+  }
+  .corner-marks::after {
+    bottom: 10px;
+    inset-inline-end: 10px;
+    border-width: 0 1.5px 1.5px 0;
+  }
+
+  /* Faint geometric pattern derived from the emblem's diamond geometry. */
+  .emblem-pattern {
+    background-image:
+      linear-gradient(45deg, rgba(4, 78, 59, 0.04) 1px, transparent 1px),
+      linear-gradient(-45deg, rgba(4, 78, 59, 0.04) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+  .emblem-pattern-dark {
+    background-image:
+      linear-gradient(45deg, rgba(232, 197, 71, 0.05) 1px, transparent 1px),
+      linear-gradient(-45deg, rgba(232, 197, 71, 0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+
+  /* Engraved gold text — static, no animation. */
+  .text-gold-engraved {
+    background: linear-gradient(180deg, #e8c547 0%, #c9a227 55%, #876b18 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Official seal — circular stamp used in header/menu/hero. */
+  .official-seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(201, 162, 39, 0.6);
+    box-shadow:
+      inset 0 0 0 3px rgba(201, 162, 39, 0.12),
+      0 0 0 1px rgba(201, 162, 39, 0.08);
+    color: #c9a227;
+    font-family: var(--font-mono), monospace;
+    letter-spacing: 0.12em;
+  }
+
+  /* Numbered document row marker. */
+  .doc-number {
+    font-family: var(--font-mono), monospace;
+    font-variant-numeric: tabular-nums;
+    color: rgba(201, 162, 39, 0.75);
+    letter-spacing: 0.08em;
+  }
+
+  /* Staggered reveal for the mobile sheet links. */
+  .sheet-item {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: sheetItemIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes sheetItemIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sheet-item {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 @layer components {
@@ -300,6 +501,72 @@
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  /* شريط أخبار v3: أهدأ من marquee-curve لأن المحتوى نصي يُقرأ.
+     الاتجاه من اليمين لليسار: الأخبار تدخل من يمين الشاشة وتخرج من يسارها. */
+  .ticker-scroll {
+    animation: tickerScroll 55s linear infinite;
+  }
+  @keyframes tickerScroll {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  /* شريط قصص النجاح العمودي في قسم «نبض المدينة» (v3): البطاقات تصعد
+     للأعلى بحلقة مضاعفة بلا قفزة، وتتوقف عند المرور عبر hover في المكوّن. */
+  .v3-resolved-scroll {
+    animation: v3ResolvedScroll 38s linear infinite;
+  }
+  @keyframes v3ResolvedScroll {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-50%);
+    }
+  }
+
+  /* نبض حلقي ذهبي لنقطة شريط المستجدات */
+  .ticker-pulse-ring {
+    animation: tickerPulseRing 1.9s ease-in-out infinite;
+  }
+  @keyframes tickerPulseRing {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(201, 164, 92, 0.25);
+    }
+    50% {
+      box-shadow: 0 0 0 5px rgba(201, 164, 92, 0.25);
+    }
+  }
+
+  /* رسم خط النبض (ECG) في شريط المستجدات: يُرسم ثم يتلاشى ويعيد */
+  .ecg-line {
+    stroke-dasharray: 100;
+    animation: ecgDraw 4s linear infinite;
+  }
+  @keyframes ecgDraw {
+    0% {
+      stroke-dashoffset: 100;
+      opacity: 1;
+    }
+    30% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    88% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0;
     }
   }
 
@@ -409,8 +676,388 @@
     .vault-tick,
     .marquee-curve,
     .marquee-slow,
+    .ticker-scroll,
+    .v3-resolved-scroll,
+    .ticker-pulse-ring,
+    .ecg-line,
     .breathe-soft,
     .stage-shimmer {
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+  /*
+   * Background video banner.
+   *
+   * A 16:9 player has to behave like `object-fit: cover` inside a banner that is
+   * much wider than it is tall. An iframe cannot be object-fit, so the frame is
+   * sized against its own container with container-query units: whichever axis
+   * would leave a gap wins, and the overflow is clipped by the parent.
+   */
+  .video-cover-stage {
+    container-type: size;
+  }
+
+  .video-cover-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 0;
+    /* Fallback for browsers without container-query units. */
+    min-width: 100%;
+    min-height: 100%;
+    width: max(100cqw, calc(100cqh * 16 / 9));
+    height: max(100cqh, calc(100cqw * 9 / 16));
+    pointer-events: none;
+  }
+
+  /*
+   * A local <video> needs none of the iframe gymnastics above — it understands
+   * object-fit by itself. Same cover behaviour, one line.
+   */
+  .video-cover-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  /*
+   * Cinematic scrim. Strong enough on the reading side that white text clears
+   * 4.5:1 over any frame of the footage, easing off toward the far edge so the
+   * picture still reads. The last layer is a faint emerald wash that ties the
+   * banner to the platform's own colour rather than leaving it neutral grey.
+   */
+  .cinema-scrim {
+    background-image:
+      linear-gradient(
+        to left,
+        rgba(12, 10, 9, 0.88) 0%,
+        rgba(12, 10, 9, 0.78) 34%,
+        rgba(12, 10, 9, 0.52) 68%,
+        rgba(12, 10, 9, 0.42) 100%
+      ),
+      linear-gradient(
+        to top,
+        rgba(12, 10, 9, 0.62) 0%,
+        rgba(12, 10, 9, 0.12) 52%,
+        rgba(12, 10, 9, 0.28) 100%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(4, 47, 36, 0.42) 0%,
+        rgba(4, 47, 36, 0.14) 60%,
+        rgba(4, 47, 36, 0.3) 100%
+      );
+  }
+
+  /*
+   * v3 official-banner scrim. Same job as .cinema-scrim but in the palette of
+   * the government reference banner: deep charcoal-green (#0C2B21 / #171C20)
+   * with a faint gold wash, so the footage sits behind a formal dark gradient
+   * instead of the emerald-tinted one. v2 keeps its own class untouched.
+   */
+  .cinema-scrim-v3 {
+    background-image:
+      linear-gradient(
+        to top,
+        rgba(15, 22, 26, 0.96) 0%,
+        rgba(15, 22, 26, 0.86) 30%,
+        rgba(15, 22, 26, 0.5) 62%,
+        rgba(15, 22, 26, 0.2) 100%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(194, 167, 28, 0.1) 0%,
+        rgba(194, 167, 28, 0.03) 55%,
+        rgba(12, 43, 33, 0.28) 100%
+      );
+  }
+
+  @media (max-width: 1023px) {
+    .cinema-scrim-v3 {
+      background-image:
+        linear-gradient(
+          to top,
+          rgba(15, 22, 26, 0.97) 0%,
+          rgba(15, 22, 26, 0.88) 38%,
+          rgba(15, 22, 26, 0.54) 72%,
+          rgba(15, 22, 26, 0.2) 100%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(194, 167, 28, 0.08) 0%,
+          rgba(12, 43, 33, 0.2) 100%
+        );
+    }
+  }
+
+  /*
+   * Stacked layout puts text over the whole frame. The scrim stays heavy where
+   * the headline and buttons sit and lifts toward the top edge, so the city is
+   * actually visible instead of being reduced to a dark texture.
+   */
+  @media (max-width: 1023px) {
+    .cinema-scrim {
+      background-image:
+        linear-gradient(
+          to top,
+          rgba(12, 10, 9, 0.88) 0%,
+          rgba(12, 10, 9, 0.8) 38%,
+          rgba(12, 10, 9, 0.55) 76%,
+          rgba(12, 10, 9, 0.28) 100%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(4, 47, 36, 0.24) 0%,
+          rgba(4, 47, 36, 0.08) 100%
+        );
+    }
+
+    /*
+     * A 16:9 frame cropped into a near-square banner zooms hard, and centring it
+     * lands on the road. Biasing the frame downward shows the upper band of the
+     * shot instead — the skyline, which is what makes the city recognisable.
+     */
+    .video-cover-frame {
+      top: 64%;
+    }
+
+    /* Same bias for a local <video>, expressed as object-position. */
+    .video-cover-media {
+      object-position: center 35%;
+    }
+  }
+
+  /* Shown until the player paints, and kept as-is when motion is reduced. */
+  .video-fallback {
+    background-image:
+      radial-gradient(
+        ellipse 80% 70% at 85% 10%,
+        rgba(16, 185, 129, 0.22) 0%,
+        rgba(16, 185, 129, 0) 62%
+      ),
+      radial-gradient(
+        ellipse 70% 60% at 10% 95%,
+        rgba(201, 162, 39, 0.16) 0%,
+        rgba(201, 162, 39, 0) 60%
+      ),
+      linear-gradient(135deg, #04231b 0%, #052f24 48%, #06392c 100%);
+  }
+}
+
+/*
+ * Rich gradient system — "Liquid Emerald & Radiant Gold".
+ * Shared mesh backgrounds, animated gradient text, gradient card borders,
+ * and glowing panels reused across the public pages.
+ */
+@layer components {
+  /* Light warm mesh: cream base with emerald/gold radials. */
+  .gradient-mesh-light {
+    background:
+      radial-gradient(
+        ellipse 60% 50% at 88% 0%,
+        rgba(232, 197, 71, 0.16) 0%,
+        rgba(232, 197, 71, 0) 60%
+      ),
+      radial-gradient(
+        ellipse 55% 60% at 5% 100%,
+        rgba(16, 185, 129, 0.13) 0%,
+        rgba(16, 185, 129, 0) 62%
+      ),
+      radial-gradient(
+        ellipse 42% 42% at 50% 45%,
+        rgba(52, 211, 153, 0.07) 0%,
+        rgba(52, 211, 153, 0) 70%
+      ),
+      linear-gradient(180deg, #fbf8f1 0%, #f7f2e8 100%);
+  }
+
+  /* Deep emerald mesh with a gold glow for dark sections/panels. */
+  .gradient-mesh-dark {
+    background:
+      radial-gradient(
+        ellipse 55% 60% at 90% 0%,
+        rgba(201, 162, 39, 0.18) 0%,
+        rgba(201, 162, 39, 0) 60%
+      ),
+      radial-gradient(
+        ellipse 60% 65% at 4% 100%,
+        rgba(16, 185, 129, 0.2) 0%,
+        rgba(16, 185, 129, 0) 62%
+      ),
+      radial-gradient(
+        ellipse 45% 45% at 50% 40%,
+        rgba(6, 95, 70, 0.55) 0%,
+        rgba(6, 95, 70, 0) 75%
+      ),
+      linear-gradient(150deg, #022c22 0%, #064e3b 55%, #065f46 100%);
+  }
+
+  /* Animated gradient text: gold flowing into emerald and back. */
+  .text-gradient-gold-animated {
+    background: linear-gradient(
+      90deg,
+      #a8861f 0%,
+      #e8c547 28%,
+      #c9a227 50%,
+      #10b981 74%,
+      #a8861f 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 7s ease-in-out infinite;
+  }
+
+  .text-gradient-emerald-animated {
+    background: linear-gradient(
+      90deg,
+      #047857 0%,
+      #10b981 32%,
+      #c9a227 62%,
+      #047857 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 8s ease-in-out infinite;
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /*
+   * Gradient border revealed on hover. The ::before ring is masked so only
+   * a 1.5px frame paints, letting the card's own background show through.
+   */
+  .card-border-gradient {
+    position: relative;
+  }
+  .card-border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 162, 39, 0.65),
+      rgba(16, 185, 129, 0.55) 50%,
+      rgba(232, 197, 71, 0.65)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .card-border-gradient:hover::before {
+    opacity: 1;
+  }
+
+  /* Always-on animated gradient frame for featured cards. */
+  .card-frame-featured::before {
+    opacity: 1;
+    background: linear-gradient(
+      135deg,
+      rgba(232, 197, 71, 0.85),
+      rgba(16, 185, 129, 0.6) 35%,
+      rgba(201, 162, 39, 0.85) 65%,
+      rgba(16, 185, 129, 0.6)
+    );
+    background-size: 220% 220%;
+    animation: gradientShift 6s ease-in-out infinite;
+  }
+
+  /* Rich emerald panel with a gold hairline on top (dialogs, result headers). */
+  .gradient-panel-emerald {
+    position: relative;
+    background:
+      radial-gradient(
+        ellipse 70% 90% at 90% 0%,
+        rgba(232, 197, 71, 0.16) 0%,
+        rgba(232, 197, 71, 0) 55%
+      ),
+      linear-gradient(135deg, #065f46 0%, #047857 48%, #022c22 100%);
+    box-shadow:
+      0 1px 0 0 rgba(232, 197, 71, 0.25) inset,
+      0 12px 32px -12px rgba(4, 120, 87, 0.35);
+  }
+
+  /* Section auroras: same soft washes as aurora-soft-* but slowly drifting. */
+  .aurora-section-emerald {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(16, 185, 129, 0.14) 0%,
+      rgba(16, 185, 129, 0.05) 35%,
+      rgba(16, 185, 129, 0) 70%
+    );
+    filter: blur(40px);
+    will-change: transform;
+    animation: auroraDrift 20s ease-in-out infinite alternate;
+  }
+  .aurora-section-gold {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(232, 197, 71, 0.16) 0%,
+      rgba(201, 162, 39, 0.06) 35%,
+      rgba(201, 162, 39, 0) 70%
+    );
+    filter: blur(40px);
+    will-change: transform;
+    animation: auroraDrift 24s ease-in-out infinite alternate-reverse;
+  }
+
+  /* Dark-section auroras, slightly stronger so they read on deep emerald. */
+  .aurora-section-emerald-dark {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(52, 211, 153, 0.22) 0%,
+      rgba(16, 185, 129, 0.08) 40%,
+      rgba(16, 185, 129, 0) 70%
+    );
+    filter: blur(46px);
+    will-change: transform;
+    animation: auroraDrift 22s ease-in-out infinite alternate;
+  }
+  .aurora-section-gold-dark {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(232, 197, 71, 0.2) 0%,
+      rgba(201, 162, 39, 0.07) 40%,
+      rgba(201, 162, 39, 0) 70%
+    );
+    filter: blur(46px);
+    will-change: transform;
+    animation: auroraDrift 26s ease-in-out infinite alternate-reverse;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .text-gradient-gold-animated,
+    .text-gradient-emerald-animated,
+    .card-frame-featured::before,
+    .aurora-section-emerald,
+    .aurora-section-gold,
+    .aurora-section-emerald-dark,
+    .aurora-section-gold-dark {
       animation: none !important;
     }
   }

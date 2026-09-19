@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -18,13 +18,11 @@ import {
   X,
 } from "lucide-react";
 import { AiSparkleIcon } from "@/components/icons/ai-sparkle-icon";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -42,136 +40,68 @@ import {
 } from "@/components/ui/dialog";
 import { PageHeader } from "@/components/shared/page-header";
 import { branches } from "@/data/branches";
-import { cn, generateRef } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { CASE_TYPE_LABELS } from "@/lib/constants";
+import {
+  GOVERNORATES,
+  SUBMIT_STEPS,
+  useSubmitForm,
+  type SubmitStepKey,
+} from "@/hooks/use-submit-form";
 import type { CaseType } from "@/types";
 
-const steps = [
-  { num: 1, title: "بيانات الطلب", icon: FileText },
-  { num: 2, title: "الموقع/الفرع", icon: MapPin },
-  { num: 3, title: "بيانات المواطن", icon: User },
-  { num: 4, title: "المرفقات", icon: Paperclip },
-  { num: 5, title: "مراجعة وإرسال", icon: ClipboardCheck },
-];
-
-interface FormData {
-  type: CaseType | "";
-  title: string;
-  description: string;
-  branchId: string;
-  governorate: string;
-  district: string;
-  landmark: string;
-  isAnonymous: boolean;
-  citizenName: string;
-  citizenPhone: string;
-  citizenEmail: string;
-  attachments: { name: string; size: string }[];
-}
-
-const initialData: FormData = {
-  type: "",
-  title: "",
-  description: "",
-  branchId: "",
-  governorate: "",
-  district: "",
-  landmark: "",
-  isAnonymous: false,
-  citizenName: "",
-  citizenPhone: "",
-  citizenEmail: "",
-  attachments: [],
+/** The shared step list owns order and copy; icons are this page's choice. */
+const STEP_ICONS: Record<SubmitStepKey, typeof FileText> = {
+  details: FileText,
+  location: MapPin,
+  citizen: User,
+  attachments: Paperclip,
+  review: ClipboardCheck,
 };
 
-const governorates = [
-  "العاصمة",
-  "إربد",
-  "الزرقاء",
-  "البلقاء",
-  "الكرك",
-  "المفرق",
-  "العقبة",
-  "معان",
-  "الطفيلة",
-  "جرش",
-  "عجلون",
-  "مادبا",
-];
+const steps = SUBMIT_STEPS.map((s) => ({ ...s, icon: STEP_ICONS[s.key] }));
 
 export default function SubmitPage() {
-  const [step, setStep] = useState(1);
-  const [data, setData] = useState<FormData>(initialData);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [refNumber, setRefNumber] = useState("");
+  const {
+    step,
+    data,
+    showSuccess,
+    refNumber,
+    canProceed,
+    update,
+    goNext,
+    goBack,
+    addMockFile,
+    removeFile,
+    handleSubmit,
+    copyRef,
+    setShowSuccess,
+  } = useSubmitForm();
 
-  const update = <K extends keyof FormData>(key: K, value: FormData[K]) =>
-    setData((d) => ({ ...d, [key]: value }));
-
-  const canProceed = () => {
-    if (step === 1) return data.type && data.title.length > 5 && data.description.length > 15;
-    if (step === 2) return data.branchId && data.governorate;
-    if (step === 3) return data.isAnonymous || (data.citizenName && data.citizenPhone);
-    if (step === 4) return true;
-    if (step === 5) return true;
-    return false;
-  };
-
-  const handleSubmit = () => {
-    const ref = generateRef();
-    setRefNumber(ref);
-    setShowSuccess(true);
-    toast.success("تم استلام شكواك بنجاح", {
-      description: `الرقم المرجعي: ${ref}`,
-    });
-  };
-
-  const copyRef = () => {
-    navigator.clipboard.writeText(refNumber);
-    toast.success("تم نسخ الرقم المرجعي");
-  };
-
-  const addMockFile = () => {
-    const sizes = ["1.2 MB", "856 KB", "2.4 MB", "640 KB"];
-    const names = [
-      "صورة_الموقع.jpg",
-      "تقرير_المعاينة.pdf",
-      "وثيقة_داعمة.pdf",
-      "فيديو_توضيحي.mp4",
-    ];
-    const idx = data.attachments.length % names.length;
-    update("attachments", [
-      ...data.attachments,
-      { name: names[idx], size: sizes[idx] },
-    ]);
-    toast.success("تم رفع الملف", {
-      description: names[idx],
-    });
-  };
-
-  const removeFile = (idx: number) => {
-    update(
-      "attachments",
-      data.attachments.filter((_, i) => i !== idx)
-    );
-  };
+  /* تحديد نوع الطلب مسبقاً عند القدوم من بطاقات الفئات في الرئيسية
+     (مثال: /submit?type=service). يُقرأ الرابط مرة واحدة عند التحميل. */
+  useEffect(() => {
+    const t = new URLSearchParams(window.location.search).get("type");
+    if (t && t in CASE_TYPE_LABELS) update("type", t as CaseType);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <PageHeader
         badge="تقديم شكوى أو مقترح"
         title="نموذج التقديم الإلكتروني"
-        description="املأ النموذج خطوة بخطوة. يستغرق الأمر دقيقتين فقط، ويمكنك التقديم بشكل مجهول."
+        description="املأ النموذج خطوة بخطوة. يستغرق الأمر دقيقتين فقط، وستحصل على رقم مرجعي فوري للتتبع."
       />
 
       <div className="container py-8 lg:py-12 max-w-4xl">
         {/* Stepper */}
-        <Card className="p-4 sm:p-5 lg:p-6 mb-6">
+        <Card className="p-4 sm:p-5 lg:p-6 mb-6 hero-card-glow">
           {/* Mobile: progress bar + active step label */}
           <div className="sm:hidden">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-700 text-white font-display font-bold text-sm">
+                <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 text-white font-display font-bold text-sm">
                   {step}
                 </div>
                 <div>
@@ -189,7 +119,7 @@ export default function SubmitPage() {
             </div>
             <div className="h-2 rounded-full bg-stone-100 overflow-hidden">
               <motion.div
-                className="h-full bg-emerald-700"
+                className="h-full bg-gradient-to-l from-emerald-600 via-emerald-500 to-gold-500"
                 initial={false}
                 animate={{ width: `${(step / steps.length) * 100}%` }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
@@ -204,8 +134,9 @@ export default function SubmitPage() {
                     key={s.num}
                     className={cn(
                       "h-1.5 flex-1 rounded-full transition-colors",
-                      isComplete && "bg-emerald-700",
-                      isActive && "bg-emerald-500",
+                      isComplete &&
+                        "bg-gradient-to-l from-emerald-600 to-emerald-500",
+                      isActive && "bg-gradient-to-l from-emerald-500 to-gold-500",
                       !isActive && !isComplete && "bg-stone-200"
                     )}
                   />
@@ -227,9 +158,9 @@ export default function SubmitPage() {
                       className={cn(
                         "h-11 w-11 rounded-full flex items-center justify-center font-display font-bold text-sm border-2 transition-all",
                         isComplete &&
-                          "bg-emerald-700 text-white border-emerald-700",
+                          "bg-gradient-to-br from-emerald-600 to-emerald-800 text-white border-emerald-700",
                         isActive &&
-                          "bg-white text-emerald-700 border-emerald-700 ring-4 ring-emerald-100",
+                          "bg-white text-emerald-700 border-emerald-700 ring-4 ring-gold-200/70",
                         !isActive &&
                           !isComplete &&
                           "bg-stone-50 text-stone-400 border-stone-200"
@@ -253,8 +184,10 @@ export default function SubmitPage() {
                   {i < steps.length - 1 && (
                     <div
                       className={cn(
-                        "h-px w-12 lg:w-16 mt-[-20px]",
-                        isComplete ? "bg-emerald-700" : "bg-stone-200"
+                        "h-0.5 w-12 lg:w-16 mt-[-20px] rounded-full",
+                        isComplete
+                          ? "bg-gradient-to-l from-emerald-600 to-gold-500"
+                          : "bg-stone-200"
                       )}
                     />
                   )}
@@ -265,7 +198,7 @@ export default function SubmitPage() {
         </Card>
 
         {/* Form */}
-        <Card className="p-6 lg:p-8 min-h-[440px]">
+        <Card className="p-6 lg:p-8 min-h-[440px] hero-card-glow">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -364,7 +297,7 @@ export default function SubmitPage() {
                         <SelectValue placeholder="اختر المحافظة" />
                       </SelectTrigger>
                       <SelectContent>
-                        {governorates.map((g) => (
+                        {GOVERNORATES.map((g) => (
                           <SelectItem key={g} value={g}>
                             {g}
                           </SelectItem>
@@ -438,82 +371,59 @@ export default function SubmitPage() {
                 <div className="space-y-5">
                   <div>
                     <h2 className="font-display font-bold text-xl text-stone-900 mb-1">
-                      بياناتك الشخصية (اختياري)
+                      بياناتك الشخصية
                     </h2>
                     <p className="text-sm text-stone-500">
-                      تستطيع التقديم بشكل مجهول. بياناتك آمنة ولن تُعرض إلا
-                      للمنسق المسؤول.
+                      بياناتك آمنة ومشفّرة، ولن تُعرض إلا للمنسق المسؤول عن
+                      ملفك.
                     </p>
                   </div>
 
-                  <Card className="p-4 bg-emerald-50/40 border-emerald-100">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <p className="font-display font-bold text-sm text-stone-900 mb-0.5">
-                          تقديم مجهول الهوية
-                        </p>
-                        <p className="text-xs text-stone-500">
-                          لن نطلب أي بيانات شخصية، يكفي رقم مرجعي للتتبع.
-                        </p>
-                      </div>
-                      <Switch
-                        checked={data.isAnonymous}
-                        onCheckedChange={(v) => update("isAnonymous", v)}
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="name" className="mb-2 block">
+                        الاسم الكامل
+                      </Label>
+                      <Input
+                        id="name"
+                        placeholder="مثال: محمد أحمد العلي"
+                        value={data.citizenName}
+                        onChange={(e) => update("citizenName", e.target.value)}
                       />
                     </div>
-                  </Card>
-
-                  {!data.isAnonymous && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="space-y-4"
-                    >
+                    <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="name" className="mb-2 block">
-                          الاسم الكامل
+                        <Label htmlFor="phone" className="mb-2 block">
+                          رقم الهاتف
                         </Label>
                         <Input
-                          id="name"
-                          placeholder="مثال: محمد أحمد العلي"
-                          value={data.citizenName}
-                          onChange={(e) => update("citizenName", e.target.value)}
+                          id="phone"
+                          type="tel"
+                          placeholder="07XXXXXXXX"
+                          value={data.citizenPhone}
+                          onChange={(e) =>
+                            update("citizenPhone", e.target.value)
+                          }
+                          dir="ltr"
                         />
                       </div>
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="phone" className="mb-2 block">
-                            رقم الهاتف
-                          </Label>
-                          <Input
-                            id="phone"
-                            type="tel"
-                            placeholder="07XXXXXXXX"
-                            value={data.citizenPhone}
-                            onChange={(e) =>
-                              update("citizenPhone", e.target.value)
-                            }
-                            dir="ltr"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="email" className="mb-2 block">
-                            البريد الإلكتروني (اختياري)
-                          </Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            placeholder="example@email.com"
-                            value={data.citizenEmail}
-                            onChange={(e) =>
-                              update("citizenEmail", e.target.value)
-                            }
-                            dir="ltr"
-                          />
-                        </div>
+                      <div>
+                        <Label htmlFor="email" className="mb-2 block">
+                          البريد الإلكتروني (اختياري)
+                        </Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="example@email.com"
+                          value={data.citizenEmail}
+                          onChange={(e) =>
+                            update("citizenEmail", e.target.value)
+                          }
+                          dir="ltr"
+                        />
                       </div>
-                    </motion.div>
-                  )}
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -618,11 +528,7 @@ export default function SubmitPage() {
                     />
                     <ReviewItem
                       label="المُقدِّم"
-                      value={
-                        data.isAnonymous
-                          ? "مقدم بشكل مجهول"
-                          : `${data.citizenName} · ${data.citizenPhone}`
-                      }
+                      value={`${data.citizenName} · ${data.citizenPhone}`}
                     />
                     <ReviewItem
                       label="المرفقات"
@@ -655,7 +561,7 @@ export default function SubmitPage() {
             variant="outline"
             size="lg"
             disabled={step === 1}
-            onClick={() => setStep((s) => Math.max(1, s - 1))}
+            onClick={goBack}
             className="flex-1 sm:flex-initial"
           >
             <ArrowRight className="h-4 w-4" />
@@ -664,8 +570,8 @@ export default function SubmitPage() {
           {step < 5 ? (
             <Button
               size="lg"
-              disabled={!canProceed()}
-              onClick={() => setStep((s) => Math.min(5, s + 1))}
+              disabled={!canProceed}
+              onClick={goNext}
               className="flex-1 sm:flex-initial"
             >
               <span>التالي</span>
@@ -708,8 +614,8 @@ export default function SubmitPage() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="rounded-2xl bg-gradient-to-r from-emerald-700 to-emerald-800 p-5 text-center">
-            <p className="text-xs text-emerald-200 mb-1">رقمك المرجعي</p>
+          <div className="rounded-2xl gradient-panel-emerald p-5 text-center">
+            <p className="text-xs text-gold-300 mb-1">رقمك المرجعي</p>
             <p className="font-display font-extrabold text-2xl text-white tracking-wider number-mono">
               {refNumber}
             </p>

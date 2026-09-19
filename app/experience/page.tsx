@@ -13,9 +13,9 @@ import { SLAArcs } from "@/components/experience/sla-arcs";
 import { FinalThread } from "@/components/experience/final-thread";
 
 export const metadata: Metadata = {
-  title: "صوتك | التجربة السينمائية الجديدة",
+  title: "نبض الأمة | التجربة السينمائية الجديدة",
   description:
-    "تجربة بصرية تفاعلية لمنصة صوتك — رحلة الشكوى من الاستقبال حتى التدخل الميداني بإيضاح ووضوح كامل.",
+    "تجربة بصرية تفاعلية لمنصة نبض الأمة — رحلة الشكوى من الاستقبال حتى التدخل الميداني بإيضاح ووضوح كامل.",
 };
 
 export default function ExperiencePage() {
